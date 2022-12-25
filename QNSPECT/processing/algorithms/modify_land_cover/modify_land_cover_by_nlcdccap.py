@@ -54,9 +54,9 @@ class ModifyLandCoverByNLCDCCAP(QNSPECTAlgorithm):
                 with csvfile.open(newline="") as file:
                     reader = csv.DictReader(file)
                     for row in reader:
-                        name = f"""{coef_type} - {row["lc_name"]}"""
+                        name = f"""{coef_type}: {row["lc_value"]}, {row["lc_name"]}"""
                         self.coefficients[name] = int(row["lc_value"])
-        self.choices = sorted(self.coefficients)
+        self.choices = self.coefficients
 
         self.addParameter(
             QgsProcessingParameterFeatureSource(
@@ -157,7 +157,7 @@ class ModifyLandCoverByNLCDCCAP(QNSPECTAlgorithm):
 
     def shortHelpString(self):
         return """<html><body>
-<a href="https://www.noaa.gov/">Documentation</a>
+<a href="https://coast.noaa.gov/data/digitalcoast/pdf/qnspect-help-and-technical-guide.pdf#Modify_Land_Cover_NLCD_CCAP">Documentation</a>
 
 <h2>Algorithm Description</h2>
 
